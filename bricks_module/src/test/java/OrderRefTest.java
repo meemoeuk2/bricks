@@ -93,15 +93,26 @@ public class OrderRefTest {
         orders = dcc.getAllOrders();
     }
 
+
     @Then ("All the orders details are returned")
     public void checkAllOrders(){
-        // to do
+
+        assertEquals(orders.size(),dcc.getAllOrders().size());
+
     }
 
 
     @And("The order details contains the Order reference and the number of bricks ordered")
     public void checkAllOrderDetails(){
-        // to do
+
+        boolean ok=true;
+
+        for (Order x:orders){
+            if (x.reference==null) {ok=false;break;}
+            if (x.quantity==0)        {ok=false;break;}
+        }
+
+        assertEquals("order found without reference or quantity ",true,ok);
     }
 
 
